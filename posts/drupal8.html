@@ -1,0 +1,99 @@
+<!--
+.. title: What will Drupal8 bring?
+.. slug: drupal8-what-it-will-bring
+.. date: 2013-04-23 17:22:00 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/drupal8-what-it-will-bring
+.. description: 
+.. category: Professional
+-->
+
+<p>I want to leave some comprehensive about Drupal8 initiatives, because each time I read about them I get lost in the maze. I hope this will help you as well.</p>
+
+<!-- TEASER_END -->
+
+<div class="blog-text-with-item-list">The main page for Drupal 8 new release development describe the initiatives included into the new release:
+
+<ul class="blog-item-list">
+
+<li>Configuration Management: Aka something like features in core</li>
+
+<li>HTML5</li>
+
+<li>Layouts: Aka lets make something like panels be part of core</li>
+
+<li>Mobile</li>
+
+<li>Multilingual</li>
+
+<li>Views in Core (it was about time...)</li>
+
+<li>Web Services</li>
+
+</ul></div>
+
+
+
+These are definitely good picks and important things that will help to continue the adoption of Drupal 8 as one of the most trending and used CMS on the market. We have already experienced issues/short comings due to a couple of them.
+
+
+
+<div class="blog-text-with-item-list">Most of these are self-described and we do know they are needed (ie. Multilingual), so I will only focus on two of them that are particularly interesting for me:
+
+<ul class="blog-item-list">
+
+<li>Configuration Management:</li>
+
+  <ul class="blog-item-list">
+
+  <li>Currently there is no good way to move Drupal configuration information between environments because this data is scattered throughout the database in a variety of formats, oftentimes intermingled with content.</li>
+
+  <li>This also makes it impossible to version control this information, to store history, and to be able to rollback changes.</li>
+
+  <li>This initiative will laid the foundations (API, data structures, etc...) to allow a separation between configuration (ie. views configuration) and data (ie. node content).</li>
+
+  <li>This can only be done now through import/exports, features modules and other helping tools. But it is not straight forward and requires lots of work</li>
+
+  </ul>
+
+<li>Layouts:</li>
+
+  <ul class="blog-item-list">
+
+  <li>The idea is to bring unity to a system of disjointed output components (blocks, page callbacks, menus, theme settings, and more) and provide a standardized mechanism of output.</li>
+
+  <li>It includes new tools for placing content on a page and a potential for performance gains (amongst other benefits).</li>
+
+  <li>Blocks as they currently exist have out-lived their usefulness as a basic Drupal component. Lots of the issues were addressed using popular modules (e.g. Context, Panels, Display Suite) that changed the notion of how blocks work, and what can be done with them.</li>
+
+  <li>The goal of this initiative then is to build a best of breed solution leveraging the tools and experience developed in Drupal Contrib.</li>
+
+  </ul>
+
+</ul></div>
+
+
+
+<p>From my point of view the two most needed initiatives are Multilingual and Layouts. There are too many issues around them and there is need for a common community powered solution. There are way to many ways to fix current issues. But my favorite initiative is the Configuration Management one, it is something that you can accomplish now with features, but that's not good enough. I'm anxious to see how they implement it, and I'm sad that I don't have the time to contribute to it.</p>
+
+
+<p>One thing that's not included in this list is the new Plugin system. This seems to have progressed but I still can not understand how extensive the change is. In any case Modules are not going away, that's for sure. New links to follow progress of this initiative are the DP 8.x development issue <a href="http://drupal.org/node/1704454">"Hooks exposing plugins have been replaced with true plugins"</a> and the new (still incomplete) documentation <a href="http://drupal.org/node/1637614">"Plugin API in Drupal 8"</a>. Also found an interesting article about it <a href="http://previousnext.com.au/blog/understanding-drupal-8s-plugin-system">"Understanding Drupal 8's plugin system"</a>.</p>
+
+
+<p>For now it seems the code freeze will happen on <a href="http://buytaert.net/drupal-8-feature-freeze-extended">July 1st of 2013</a>, but it has been moved before, so not real hard line.</p>
+
+
+
+
+<div class="blog-text-with-item-list"><i>Updates:</i>
+
+<ul class="blog-item-list">
+
+<li>May 2014: Drupal8 also integrates into core the <a href="http://www.acquia.com/blog/d8migrate">migrate module</a> I use so much and love.</li>
+
+<li>Jul 2014 A: There's been work on the community to create <a href="https://www.drupal.org/drupal-8.0">great infographics</a> to explain what Drupal8 will bring in general and for the different identified roles. Different roles were taken from Dries Buytaert’s identified personas in his <a href="https://prague2013.drupal.org/keynote/dries-buytaert">DrupalCon Prague Keynote speech</a>.</li>
+
+<li>Jul 2014 B: Someone wrote <a href="http://drupalize.me/blog/201407/drupal-8-has-all-hotness-so-can-drupal-7">a very good article</a> that explain what modules you should use to be prepared for the change and use some of D8 improvements today. The article is based on the <a href="https://austin2014.drupal.org/session/future-proof-your-drupal-7-site">Future-Proof Your Drupal 7 Site</a> presentation of DrupalCon Austin, he translated the presentation into a blog post. Given the content I think reading the blog post makes more sense.</li>
+
+</ul></div>

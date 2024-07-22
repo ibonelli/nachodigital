@@ -1,0 +1,99 @@
+<!--
+.. title: Que nos traera Drupal8?
+.. slug: drupal8-what-it-will-bring
+.. date: 2013-04-23 17:22:00 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/es/drupal8-what-it-will-bring
+.. description: 
+.. category: Profesional
+-->
+
+<p>Como personalmente quiero tener una forma de darle sentido a las iniciativas (y traducirlas en algo que tenga sentido para mi) decí escribir este articulo. Con suerte también pueda ayudar a otros.</p>
+
+<!-- TEASER_END -->
+
+
+<div class="blog-text-with-item-list">Las iniciativas para Drupal 8 son:
+
+<ul class="blog-item-list">
+
+<li>Configuration Management: Que significa que tendremos algo similar a features en core!</li>
+
+<li>HTML5</li>
+
+<li>Layouts: En otras palabras algo que cumpla el rol de panels en core.</li>
+
+<li>Mobile</li>
+
+<li>Multilingual</li>
+
+<li>Views in Core (Finalemente!)</li>
+
+<li>Web Services</li>
+
+</ul></div>
+
+
+
+<p>En mi opinión es una muy buena selección de lo mas importante a mejorar. Estoy seguro que esto mejorará la posición de Drupal. En mi experiencia personal hay varios de estos temas que me han traido dolores de cabeza.</p>
+
+
+
+<div class="blog-text-with-item-list">La mayoría de las iniciativas no necesitan explicación, pero quiero decir algo mas de las dos que me interesan mas:
+
+<ul class="blog-item-list">
+
+<li>Configuration Management:</li>
+
+  <ul class="blog-item-list">
+
+  <li>Actualmente no hay una buena manera de trabajar con Drupal en distintos ambientes. Tanto el contenido como la configuración son parte de la misma base de datos. Esto hace muy dificil hacer una separación entre el contenido y la configuración</li>
+
+  <li>Esto evita que podamos tener información sobre versiones, guardar una historia o revertir cambios que realizamos.</li>
+
+  <li>Esta iniciativa va a construir la base (API, estructuras de datos, etc...) permitir separar el contenido (p/ej. nodos) de la configuración (p/ej. views o panels).</li>
+
+  <li>Actualmente esta separación se puede lograr usando modulos como features. Pero son arreglos y a veces traen sus propios problemas.</li>
+
+  </ul>
+
+<li>Layouts:</li>
+
+  <ul class="blog-item-list">
+
+  <li>La idea es juntar varios sistemas que existen y se pisan (blocks, page callbacks, menus, theme settings, etc...). Luego armar un mecanismo homogeneo para generar la página.</li>
+
+  <li>Drupal 8 Incluye nuevas herramientas para armar las páginas y entre otras podría traer mejoras en la eficiencia.</li>
+
+  <li>Los bloques en su estado actual sobrevivieron demasiado tiempo. Muchas de sus limitaciones se resolvieron gracias a diversos módulos (p/ej. Context, Panels, Display Suite) pero en el camino cambiaron el concepto de como los bloques funcionan y se usan.</li>
+
+  <li>En resumen el objetivo de esta iniciativa es lograr crear una nueva solución en base a las herramientas y experiecia que todos estos módulos han aportado a Drupal.</li>
+
+  </ul>
+
+</ul></div>
+
+
+
+<p>Desde mi punto de vista las dos iniciativas mas necesarias son Multilingual y Layouts. Hay demasiadas opciones para solucionar los problemas que traen y necesitan una solución de la comunidad que permita tener una forma natural de trabajar. Pero debo decir que a pesar de eso mi favorita es Configuration Management, con features ya se puede hacer mucho de lo que nos traerá... Pero no es suficiente. Estoy ansioso por ver como lo implementan y lamento no haber tenido tiempo para contribuir a su realización.</p>
+
+
+<p>Una cosa que falta en la lista es el nuevo sistemas de plugin que Drupal 8 nos traerá. Esto ha progresado, pero no puedo todavía ver que impacto tendrá. Igual por lo que ví hasta ahora los módulos no van a desaparecer. Algunos vinculos para seguir el progreso de DP 8.x es <a href="http://drupal.org/node/1704454">"Hooks exposing plugins have been replaced with true plugins"</a> y hay también información (en progreso) en <a href="http://drupal.org/node/1637614">"Plugin API in Drupal 8"</a>. También encontré el siguiente articulo <a href="http://previousnext.com.au/blog/understanding-drupal-8s-plugin-system">"Understanding Drupal 8's plugin system"</a>.</p>
+
+
+<p>Por ahora el code freeze va a ser el <a href="http://buytaert.net/drupal-8-feature-freeze-extended">1ro de Julio del 2013</a>, pero ya se ha movido antes... No creo que sea una fecha fija.</p>
+
+
+
+<div class="blog-text-with-item-list"><i>Actualizaciones</i>
+
+<ul class="blog-item-list">
+
+<li>Mayo 2014: Incluyeron en Drupal8 core el <a href="http://www.acquia.com/blog/d8migrate">módulo migrate</a> que tanto me gusta y uso.</li>
+
+<li>Julio 2014A: La comunidad creo un par de <a href="https://www.drupal.org/drupal-8.0">muy buenas páginas/infografías</a> para explicar lo nuevo que traerá Drupal8 para los distintos tipos de usuarios. Estos usuarios/roles son los que en principio Dries Buytaert’s identifico en su <a href="https://prague2013.drupal.org/keynote/dries-buytaert">presentación en DrupalCon Prague</a>.</li>
+
+<li>Julio 2014B: En <a href="http://drupalize.me/blog/201407/drupal-8-has-all-hotness-so-can-drupal-7">drupalize.me alguien escribió un muy buen articulo</a> con adelantos para los que estan ansiosos. Comenta que modulos usar para estar preparado para el cambio y aprovechar algunos de las mejoras en Drupal 7. El que lo escribe tomó la presentación <a href="https://austin2014.drupal.org/session/future-proof-your-drupal-7-site">Future-Proof Your Drupal 7 Site de DrupalCon Austin</a> y lo transformó en un blog post. Dado el contenido de la presentación creo que leer el blog post tiene mas sentido.</li>
+
+</ul></div>
