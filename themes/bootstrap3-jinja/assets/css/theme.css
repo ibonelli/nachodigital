@@ -6,6 +6,7 @@ body {
 /* You might need to adjust link colors as well */
 a {
     color: #07a860; /* Example light link color */
+    font-weight: bold;
 }
 
 a:hover,

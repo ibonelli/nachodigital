@@ -1,0 +1,30 @@
+<!--
+.. title: Using Drupal for a week
+.. slug: using-drupal-for-a-week
+.. date: 2011-12-30 18:09:42 UTC-03:00
+.. tags: linux
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/using-drupal-for-a-week
+.. description: Using Drupal for a week
+.. category: web drupal
+-->
+
+<p>I've been working with Drupal for some time now, but I finally built a full site from scratch on my own. I had a goal in mind, migration from <a href="http://tincan.co.uk/">Tincan's</a> legacy CMS <a href="http://www.phplist.com/webbler">Webbler</a>.</p>
+
+<!-- TEASER_END -->
+
+<p>The conclusion is positive. The <a href="http://drupal.org/project/migrate">migrate</a> module is definitely a very good tool/module for doing migrations, but I must say it is not magical. As everything with Drupal is as powerful as it is complex to use. But I think you still gain in the end. And lets keep in mind that there has not been a simple migration that I participated on so far. Migrations are difficult, very custom and all have its perks.</p>
+
+<p>During my investigation and due to the need that droved me I also found something VERY useful that I think it worth mentioning. There is a module called <a href="http://drupal.org/project/features">features</a> that is very handy. It allows to export almost any configuration (content types, views, taxonomy, etc...) into something you can then import. It is not an installation profile, but it is close to it. You would still need to export/import content if you need/want, but at least most configurations can be exported/imported.</p>
+
+<p>Additionally I've been using <a href="http://drupal.org/project/drush">Drush</a>. Very techy and almost always replaceable by the front end, but for techy people like me is still nice to be able to do stuff with a clean CLI (command line interface).</p>
+
+<div class="blog-text-with-item-list">The only thing to add is that Drupal is not as slow as I thought it was... If you enable cache it does really help to make it work faster. Of course you better stay away from it when building, but it does work well when you enable it. And in terms of making it run faster I found that I don't like the overlay and I found it slow. So I disable it by:
+	<ul class="blog-item-list">
+		<li>On the admin toolbar, click Modules.</li>
+		<li>In the Core section, disable the Overlay module.</li>
+		<li>Click Save Configuration.</li>
+	</ul>
+</div>
+
+<p>Ok, that's it for now. I'm looking forward to work more with Drupal.</p>

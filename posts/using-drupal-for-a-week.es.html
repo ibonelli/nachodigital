@@ -1,0 +1,30 @@
+<!--
+.. title: Usando Drupal por una semana
+.. slug: using-drupal-for-a-week
+.. date: 2011-12-30 18:09:42 UTC-03:00
+.. tags: linux
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/es/using-drupal-for-a-week
+.. description: Usando Drupal por una semana viniendo de usar un CMS propietario.
+.. category: web drupal
+-->
+
+<p>Luego de trabajar en varios sitios hechos en Drupal por otra gente logré tener tiempo para construir yo uno de cero. Tenía un objetivo en mente, migrar un sistema que teniamos en el viejo CMS (<a href="http://www.phplist.com/webbler">Webbler</a>) de la empresa para la que trabajo (<a href="http://tincan.co.uk/">Tincan</a>).</p>
+
+<!-- TEASER_END -->
+
+<p>La experiencia fue positiva. El módulo <a href="http://drupal.org/project/migrate">migrate</a> de Drupal es una gran herramienta, pero debo aclarar que no es mágica o amigable. Como todo con Drupal es muy poderosa, tiene muchas opciones y eso lo hace complicado de usar. Pero si se tiene paciencia para aprender a usarlo lograremos mucho con esta herramienta. Hay que tener en cuenta que las migaciones no son tarea fácil, no recuerdo ninguna en la que haya participado que no tuviera problemas. Todo se debe hacer a medida, y eso siempre complica las cosas.</p>
+
+<p>Durante mi investigación y teniendo en cuenta lo que quería hacer encontré una herramienta que vale la pena mencionar. El módulo <a href="http://drupal.org/project/features">features</a> es otra gran herramienta cuando se trabaja con Drupal. Permite importar/exportar casi cualquier configuración (content types, views, taxonomy, etc...), esto es algo que hace mucho mas sencilla la contrucción y migración entre ambientes.</p>
+
+<p>Otra gran herramienta de Drupal es <a href="http://drupal.org/project/drush">Drush</a>. Este es un módulo para gente que le gusta trabajar por consola y se siente cómodo con ella. La mayoría de las cosas se pueden hacer tanto desde el backend de Drupal, como por Drush.</p>
+
+<div class="blog-text-with-item-list">Creo que es importante mencionar que Drupal no es tan lento como yo esperaba que fuera. Una vez que habilitamos el cache interno sus tiempos de respuesta son mas que razonables para una plataforma de este tamaño. Por supuesto mientras estamos construyendo conviene deshabilitarlo, pero funciona muy bien una vez activado (especialmente para limpiar/actualizar cuando hay cambios). Dentro de la misma linea de trabajar rápido, debo decir que encontré lento el overlay que viene por defecto activado en Drupal7. Para deshabilitarlo debemos:
+	<ul class="blog-item-list">
+		<li>En la menú de administrador entrar a "Modules".</li>
+		<li>Dentro de los modulos en la sección de "Core" encontraremos el modulo "Overlay" y podremos deshabilitarlo.</li>
+		<li>Guardamos la configuración y... Listo!</li>
+	</ul>
+</div>
+
+<p>Ok, eso es todo por ahora. Espero tener mas tiempo para poder hacer otros sitios desde cero!</p>

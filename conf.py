@@ -142,14 +142,14 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/pages/welcome/index.html", "Welcome"),
+        ("/pages/about-me/index.html", "Welcome"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
     ),
 
     "es": (
-        ("/es/pages/bienvenido/index.html", "Bienvenido"),
+        ("/es/pages/about-me/index.html", "Bienvenido"),
         ("/es/archive.html", "Archivo"),
         ("/es/categories/", "Etiquetas"),
         ("/es/rss.xml", "Canal RSS"),
@@ -948,7 +948,7 @@ IMAGE_FOLDERS = {'images': 'images'}
 # )
 
 # Show teasers (instead of full posts) in indexes? Defaults to False.
-# INDEX_TEASERS = False
+INDEX_TEASERS = True
 
 # HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
