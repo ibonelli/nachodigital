@@ -1,0 +1,216 @@
+º<!--
+.. title: Moving an existing site into Platform.sh
+.. slug: drupal-platform-sh
+.. date: 2016-05-03 18:26:21 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/drupal-platform-sh
+.. description: 
+.. category: Professional
+-->
+
+<p>I decided to try Platform because a friend of mine needed a site. Here you can read technical details of the experience and an step by step description of the process.</p>
+
+<!-- TEASER_END -->
+
+<p>If you are in a hurry and only need a recipe, please head to <a href="/drupal-platform-sh#TheHow">the technical part of the article</a>, but I would like to start sharing a bit of my experience first because you might be still deciding if Platform is for you.</p>
+
+<p>Why? Due to several reasons I didn't want to host it on my personal server, but I didn't want to run a server for him either. I wanted to forget about maintaining the server, keeping it secure or do upgrades to it.</p>
+
+<p>So I started thinking about options for small sites:</p>
+
+<ul>
+  <li><a href="https://www.acquia.com/cloud-pricing#hardware=m1.small&storage=10&region=us-east-1">Acquia</a>: USD 134 per month</li>
+  <li><a href="https://pantheon.io/pricing">Pantheon</a>: USD 25 per month (too limited for my needs), next option USD 100</li>
+  <li><a href="https://platform.sh/pricing/">Platform</a>: USD 50 per month (decent setup)</li>
+  <li><a href="http://www.aberdeencloud.com/pricing">Aberdeen Cloud</a>: USD 49 per month</li>
+  <li><a href="https://www.openshift.com/pricing/index.html">Red Hat Openshift</a>: USD 20 per month</li>
+</ul>
+
+<p>The list is not fair in terms of what's being offered, the offer is quite different. But I used all of these before for different projects. Only one left to try was Platform.</p>
+
+<p>So going over above list with a fine cone:</p>
+
+<ul>
+  <li>I discarded RH Openshift because I wanted a solution, not just running an application. Others option offer caching servers too which does speed up things significantly.</li>
+  <li>Aberdeen: Used it before, works, but <a href="http://www.aberdeencloud.com/node/112">focused on the Europe market</a>.</li>
+  <li>Acquia is easy to use, there was a comparable option, but price was still higher.</li>
+  <li>Pantheon: I've used it and like it, but the pricing was a bit risky. 25USD option was had traffic limits, the risk of needing the 100USD option was real.</li>
+</ul>
+
+<p>Since I've been hearing very good things <a href="http://awebfactory.com/node/535">about Platform</a>, the comparison on price/specs, and my appetite for new things, I decided to give it a try.</li>
+
+<p><b>The Experience</b></p>
+
+<p>Platform do not have a free option, only way to try/use is to pay for a site. So it was a bit of a jump from a cliff. Even had a couple of rough moments while fighting to get it online when I thought it wasn't the right choice. I must say I'm more used to sysadmin for dummies interfaces, this is a programmer oriented environment. In any case as with the others once you learn its perks, the offer balance out. Not having to deal with sysadmin stuff is great to avoid charging for support and OS upgrades to your clients and focusing on Drupal alone. They provide lots of documentation, which is quite useful. But some how I failed to get things running using just that, so I had to lean a bit on their online support. The time to respond was reasonable, and support was really good.</p>
+
+<p>I would compare their approach to RH Openshift platform offering. Price is a bit higher, but final service is better. Along with hosting Drupal (or any other PHP app) they provide Solr search, Redis cache and a CDN caching network). So it is a more complete <a href="https://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a> solution. I haven't run a production Drupal on RH Openshift, but given my experience I wouldn't risk running Drupal without a proper caching mechanism.</p>
+
+<p>Any side effects? Well... Given I'm more familiar with Acquia or Pantheon service, I found a bit annoying the time you have to wait after every git push... Each time you do a push your application needs to be packaged, configured and delivered. So you end up with a bit of delay between you push something and are able to see it online. This happens with other platforms, but I found it a bit more noticeable. I guess Platform targets programmers as their main customer, so having a local environment would be a plus.</p>
+
+<p>Overall I found the experience positive, but a bit involved. If you want an easy solution I must recommend against it, but hopefully this tutorial and all their documentation will help you to cross over the bridge. And keep in mind that's only the first step, then it is just a new way of launching a site in Drupal.</p>
+
+<p>I haven't launched the site yet, so I yet to see performance of it. But given the caching approach and different services provided I think it will be ok.</p>
+
+<p><b><a name="TheHow">The How</a></b></p>
+
+<p>I guess things are easier if you don't have a process before and follow their workflow 100%. Since I had prior experience I decided to build the site locally first, and then publish online. How hard it could be? Well... Not hard, but has its perks.</p>
+
+<p>So here are the steps if you are pushing your local Drupal 7 site to Platform:</p>
+
+<ol>
+
+  <li>First thing is to <a href="https://docs.platform.sh/user_guide/overview/technical-requirements.html">add your key and start a GIT repo</a> (or upload your current GIT repo). More on the repo on last steps, but you need to get your SSH key into Platform.sh as the first step to gain access to it using GIT, SSH, etc...</li>
+
+  <li>Then you should <a href="https://docs.platform.sh/user_guide/reference/platform-app-yaml.html#default-configuration-file">write your own ".platform.app.yaml"</a> file, here is my example:
+
+    <pre><code class="lineNumbers yaml">
+name: drupal
+type: php:5.6
+build:
+    flavor: drupal
+relationships:
+    database: "database:mysql"
+    solr: "search:solr"
+    redis: "cache:redis"
+web:
+    document_root: "/"
+    passthru: "/index.php"
+    whitelist:
+      # robots.txt.
+      - /robots\.txt$    
+      # CSS and Javascript.
+      - \.css$
+      - \.js$
+      # image/* types.
+      - \.gif$
+      - \.jpe?g$
+      - \.png$
+      - \.ico$
+      - \.bmp$
+      # fonts types.
+      - \.ttf$  
+disk: 2048
+mounts:
+    "/public/sites/default/files": "shared:files/files"
+    "/tmp": "shared:files/tmp"
+    "/private": "shared:files/private"
+hooks:
+    # We run deploy hook after your application has been deployed and started.
+    deploy: |
+        cd public
+        drush -y updatedb
+crons:
+    drupal:
+        spec: "*/20 * * * *"
+        cmd: "cd public ; drush core-cron"
+    </code></pre>
+
+  </li>
+
+  <li>We also need to <a href="https://docs.platform.sh/user_guide/reference/services-yaml.html">add MySQL service (among others)</a> to our application. So we need to add another file to the repository: ".platform/services.yaml":
+
+    <pre><code class="lineNumbers yaml">
+database:
+  type: mysql:5.5
+  disk: 512
+search:
+  type: solr:4.10
+  disk: 512
+cache:
+  type: redis:2.8
+    </code></pre>
+
+    <p>This is actually one of the good things about using Platform.sh, you can have your Drupal with SOLR+Redis at the same cost. When using search on your site SOLR does really help, and when configured in Drupal Redis can speed up your site's logged in response time (it is similar to Memcache).</p>
+
+  </li>
+
+  <li>We also need to <a href="https://docs.platform.sh/user_guide/using/going-live.html">add the domain</a>, this is done by adding the file ".platform/routes.yaml":
+
+    <pre><code class="lineNumbers yaml">
+"http://www.{default}/":
+    type: upstream
+    upstream: "drupal:php"
+"http://{default}/":
+    type: redirect
+    to: "http://www.{default}/"
+    </code></pre>
+
+  </li>
+
+  <li>Now you need to configure Drupal to use platform DB service. You do this by <a href="https://docs.platform.sh/user_guide/reference/toolstacks/php/drupal/customizing-settings-php.html">customizing your settings.php</a>, Platform will automatically create a "settings.local.php" file which will connect you to the DB. So replace your "settings.php" with:
+
+    <pre><code class="lineNumbers php">
+&lt;?php
+$update_free_access = FALSE;
+$local_settings = dirname(__FILE__) . '/settings.local.php';
+if (file_exists($local_settings)) {
+  require_once($local_settings);
+}
+    </code></pre>
+
+  </li>
+
+  <li>And we are ready to start copying things across. I will being with the <a href="https://docs.platform.sh/drupal_migrate/guides/type/php/drupal/migrate/import-database.html">DB copy</a>. There are other options, but I will explain using an SSH connection:
+
+    <pre><code class="lineNumbers bash">
+scp mysitesdb.dump.gz [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh:/app/tmp
+ssh [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh
+zcat tmp/mysitesdb.dump.gz | mysql -h database.internal main
+rm tmp/mysitesdb.dump.gz
+    </code></pre>
+
+  </li>
+
+  <li>To get your code into the <a href="https://docs.platform.sh/drupal_migrate/guides/local/git-initialize-repository.html">platform git repo</a> you'll need to create/push it:
+
+    <pre><code class="lineNumbers bash">
+cd mysite/code
+git init
+git remote add platform [PROJECT-ID]@git.[REGION].platform.sh:[PROJECT-ID].git
+git add --all
+git commit -m "Initial commit of My Project"
+git push
+    </code></pre>
+
+    <p>It is important to know that each git push trigers your app building by platform. So the push will take more than you are used to. It won't only push, but also build the whole application for you on each push.</p>
+
+  </li>
+
+  <li>To <a href="https://docs.platform.sh/drupal_migrate/guides/type/php/drupal/migrate/import-files.html">import the files</a> you can use rsync:
+
+    <pre><code class="lineNumbers bash">
+rsync -r my/local/files/. [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh:public/sites/default/files/
+    </code></pre>
+
+  </li>
+
+  <li>Finally we will need to <a href="https://docs.platform.sh/drupal_migrate/guides/type/php/drupal/rebuild-site-registry.html">rebuild the site registry</a>:
+
+    <pre><code class="lineNumbers bash">
+ssh [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh
+drush dl registry_rebuild --destination=/app/tmp
+sed -i 's/, define_drupal_root()/, '"'"'\/app\/public'"'"'/' /app/tmp/registry_rebuild/registry_rebuild.php
+cd /app/public
+php ../tmp/registry_rebuild/registry_rebuild.php
+    </code></pre>
+
+  </li>
+
+</ol>
+
+
+
+<p>Following these steps I ended up with my local version of the site running on platform. Process for Drupal 8 is quite similar, you definitely don't need the final step. Also I recall a simpler setup for settings.php, but it doesn't differ much from the above.</p>
+
+
+
+<p>Main gotchas for me where adding normal files (CSS, JS & images) to the ".platform.app.yaml" file within the "whitelist" section and took me a while to be able to run from proper DB (by creating custom setting.php shared above). In both situations support took a bit of time, but got me into the right track.</p>
+
+
+
+<p>There is lot of documentation, but I would like to flag the <a href="https://github.com/platformsh/platformsh-docs/blob/master/using/getting-started-for-the-impatient.md">"Getting started for the impatient"</a> because it is in line with this blog post. Didn't solve all my issues, but it is a nice brief of the whole thing.</p>
+
+
+
+<p>Hope this helps someone out there. I know I looked for prior experiences and found little information but the Platform.sh docs.

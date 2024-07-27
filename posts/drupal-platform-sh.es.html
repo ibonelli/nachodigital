@@ -1,0 +1,208 @@
+<!--
+.. title: Moviendo un sitio ya creado a Platform.sh
+.. slug: drupal-platform-sh
+.. date: 2016-05-03 18:26:21 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/es/drupal-platform-sh
+.. description: 
+.. category: Profesional
+-->
+
+<p>llegué a probar Platform por que un amigo necesitaba un sitio. En este artículo se pueden ver los detalles técticos de la experiencia y un paso a paso del proceso que seguí.</p>
+
+<!-- TEASER_END -->
+
+<p>Si están apurados y solo necesitan una receta, vayan directamente <a href="/es/drupal-platform-sh#TheHow">a la parte práctica del articulo</a>, pero quiero comentar un poco mi experiencia ya que puede que solo estén decidiendo si Platform es para ustedes.</p>
+
+<p>¿Por qué? Varias razones... Yo prefería mantener el nuevo sitio fuera de mi server personal, y tampoco quería mantener un server para mi amigo, hacer actualizaciones de seguridad, etc...</p>
+
+<p>Así que empecé a pensar en opciones para sitios chicos:</p>
+
+<ul>
+  <li><a href="https://www.acquia.com/cloud-pricing#hardware=m1.small&storage=10&region=us-east-1">Acquia</a>: USD 134 por mes</li>
+  <li><a href="https://pantheon.io/pricing">Pantheon</a>: USD 25 por mes (bastante limitado en tráfico), siguiente opción USD 100</li>
+  <li><a href="https://platform.sh/pricing/">Platform</a>: USD 50 por mes (buen balance de recursos/costo sin limitación de tráfico)</li>
+  <li><a href="http://www.aberdeencloud.com/pricing">Aberdeen Cloud</a>: USD 49 por mes</li>
+  <li><a href="https://www.openshift.com/pricing/index.html">Red Hat Openshift</a>: USD 20 por mes</li>
+</ul>
+
+<p>La lista no es pareja en termino de lo que los proveedores ofrecen, pero los he usado a casi todos antes para diferentes proyectos. El único que me quedaba probar era Platform.</p>
+
+<p>Viendo cada uno un poco mas en detalle:</p>
+
+<ul>
+  <li>Dejé RH Openshift de lado por que le faltan servicios, adicionales. En mi experiencia Drupal funciona lento sin caché, y las opciones dentro de RH OpenShift o combinarlo con otras cosas complicaba a la solución.</li>
+  <li>Aberdeen: Lo he usado, funciona bien, pero está <a href="http://www.aberdeencloud.com/node/112">muy enfocado en Europa</a>.</li>
+  <li>Acquia es fácil de usar y había una opción de dentro de los costos, pero estaba por encima de todas las otras opciones.</li>
+  <li>Pantheon: Lo he usado y me gusta, pero el esquema de precios era arriesgado. La opción de 25USD tenía limitaciones de tráfico, y el riesgo de tener que pasar a la opción de 100USD era probable.</li>
+</ul>
+
+<p>He estado escuchando cosas muy buenas de <a href="http://awebfactory.com/node/535">Platform</a>, y la comparación de precios y prestaciones es buena. Como soy propenso a probar cosas, terminé inclinándome por intentar usarlo.</li>
+
+<p><b>La Experiencia</b></p>
+
+<p>Platform no tiene una opción gratis, la única forma de usarlo/probarlo es pagar por un sitio. Esto hizo que la experiencia fuera algo así como un salto al vacío. Incluso tuve un par de momentos difíciles tratando de hacerlo andar y poner el sitio en linea, lo que me hizo pensar que quizás no era la mejor opción. Debo decir que estoy mas acostumbrado a soluciones orientadas a resolver las cosas lo mas sencillo posible, Platform esta orientado a programadores y configuración por archivos. En cualquier caso una vez que uno entiende la lógica y aprende los detalles de implementación, las cosas funcionan y uno gana mas de lo que pierde. No tener que hacer el mantenimiento del sitio y poder evitar cobrar por el es una gran cosa y permite enfocarnos solo en Drupal. Ellos proveen mucha documentación, pero no pude hacer el sitio solo con eso. Gracias a que el soporte es muy bueno, y los tiempos de respuestas son razonables, logré sacarlo andando.</p>
+
+<p>Debo decir que la plataforma me hace mucho acordar a RH Openshift. El precio es un poco mas alto, pero el servicio final es mejor para Drupal. Tener los servicios de búsqueda Solr, Redis cache y la solución de caché para navegación anónima mejora (y mucho) el rendimiento de un sitio Drupal. Lo que lo transforma en una solución <a href="https://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a> mas que en un servicio de hosting de aplicaciones. Debo decir que solo he corrido sitios Drupal de desarrollo RH Openshift, pero en base a mi experiencia no me arriesgaría a correr Drupal sin una solución de caché adecuada.</p>
+
+<p>Debo decir que me son mas familiares las soluciones de Acquia o Pantheon, y me molestó un poco el tiempo que debemos esperar luego de cada git push... Esto es por que cada vez que uno hace push la aplicación debe ser empacada, configurada y puesta en linea. Y terminamos teniendo una demora entre que uno hace el cambio y lo ve en producción. Esto también pasa en las otras plataformas, pero me pareció mas lento en Platform. Para mi es un producto pensado para programadores que usen un ambiente local.</p>
+
+<p>En general la experiencia fue positiva, pero me llevo mas de lo que esperaba. Definitivamente no la recomendaría para gente buscando algo fácil de usar.</p>
+
+<p>Todavía no puse el sitio en producción, así que me falta ver cuan bien ande. Teniendo en cuenta que entre otros servicios proveen caché, dudo que tenga problemas de rendimiento/velocidad.</p>
+
+
+
+<p><b><a name="TheHow">La receta</a></b></p>
+
+<p>Creo que si uno no tiene nada y sigue 100% el procedimiento de Platform, puede ser mas sencillo el proceso... Pero como tenía experiencia previa decidí armar el sitio en mi ambiente local primero y luego subirlo a Platform. Cuan dificil puede ser no? Bueno, not tanto... Pero tiene sus idiosincrasias.</p>
+
+<p>Estos son los pasos a seguir si queremos llevar nuestro sitio local Drupal 7 a Platform:</p>
+
+<ol>
+  <li>Lo primero que debemos hacer es <a href="https://docs.platform.sh/user_guide/overview/technical-requirements.html">agregar nuestra key y crear un GIT repo</a> (o subir nuestro repositorio actual). Hay mas sobre el repositorio en los pasos finales, pero debemos agregar nuestra key a Platform.sh como primer paso para poder usar GIT, SSH, etc...</li>
+  <li>Luego debemos <a href="https://docs.platform.sh/user_guide/reference/platform-app-yaml.html#default-configuration-file">escribir nuestro archivo ".platform.app.yaml"</a>, acá tienen un ejemplo:
+    <pre><code class="lineNumbers yaml">
+name: drupal
+type: php:5.6
+build:
+    flavor: drupal
+relationships:
+    database: "database:mysql"
+    solr: "search:solr"
+    redis: "cache:redis"
+web:
+    document_root: "/"
+    passthru: "/index.php"
+    whitelist:
+      # robots.txt.
+      - /robots\.txt$    
+      # CSS and Javascript.
+      - \.css$
+      - \.js$
+      # image/* types.
+      - \.gif$
+      - \.jpe?g$
+      - \.png$
+      - \.ico$
+      - \.bmp$
+      # fonts types.
+      - \.ttf$  
+disk: 2048
+mounts:
+    "/public/sites/default/files": "shared:files/files"
+    "/tmp": "shared:files/tmp"
+    "/private": "shared:files/private"
+hooks:
+    # We run deploy hook after your application has been deployed and started.
+    deploy: |
+        cd public
+        drush -y updatedb
+crons:
+    drupal:
+        spec: "*/20 * * * *"
+        cmd: "cd public ; drush core-cron"
+    </code></pre>
+
+  </li>
+
+  <li>Ahora debemos <a href="https://docs.platform.sh/user_guide/reference/services-yaml.html">agregar el servicio de MySQL (entre otros)</a> para nuestra aplicación. Para esto debemos agregar otro archivo a nuestro repositorio: ".platform/services.yaml":
+
+    <pre><code class="lineNumbers yaml">
+database:
+  type: mysql:5.5
+  disk: 512
+search:
+  type: solr:4.10
+  disk: 512
+cache:
+  type: redis:2.8
+    </code></pre>
+    <p>Esta es una de las ventajas de usar Platform.sh, por el mismo costo tenemos SOLR+Redis para que nuestro sitio. Si van a usar la función de búsqueda de Drupal, SOLR es un gran aliado. Y si se toman el trabajo de configurar Drupal para que use Redis, el tiempo de crear las páginas de usuarios registrados (no anónimos) mejorará mucho. Este servicio es muy similar a Memcache, cumplen la misma función.</p>
+  </li>
+  <li>También debemos <a href="https://docs.platform.sh/user_guide/using/going-live.html">agregar nuestro dominio</a> a la configuración de la aplicación, esto lo hacemos agregando el archivo ".platform/routes.yaml":
+    <pre><code class="lineNumbers yaml">
+"http://www.{default}/":
+    type: upstream
+    upstream: "drupal:php"
+"http://{default}/":
+    type: redirect
+    to: "http://www.{default}/"
+    </code></pre>
+  </li>
+  <li>Ahora debemos configurar Drupal para que use el servicio de base de datos de Platform. Esto lo hacemos <a href="https://docs.platform.sh/user_guide/reference/toolstacks/php/drupal/customizing-settings-php.html">cambiando nuestro settings.php</a>, Platform toma nuestro archivo y automáticamente crea el archivo "settings.local.php" que nos conectará con la base de datos. Así que reemplacemos nuestro "settings.php" con:
+    <pre><code class="lineNumbers php">
+&lt;?php
+$update_free_access = FALSE;
+$local_settings = dirname(__FILE__) . '/settings.local.php';
+if (file_exists($local_settings)) {
+  require_once($local_settings);
+}
+    </code></pre>
+
+  </li>
+
+  <li>Y estamos listos para empezar a copiar archivos. Comenzaremos por hacer una <a href="https://docs.platform.sh/drupal_migrate/guides/type/php/drupal/migrate/import-database.html">copia de la base de datos</a> . Hay otras formas de hacerlo, pero yo lo voy a explicar usando un conexión SSH:
+
+    <pre><code class="lineNumbers bash">
+scp mysitesdb.dump.gz [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh:/app/tmp
+ssh [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh
+zcat tmp/mysitesdb.dump.gz | mysql -h database.internal main
+rm tmp/mysitesdb.dump.gz
+    </code></pre>
+
+  </li>
+
+  <li>Para llevar nuestro código al <a href="https://docs.platform.sh/drupal_migrate/guides/local/git-initialize-repository.html">repositorio git de Platform</a> debemos hacer en nuestro repositorio local:
+
+    <pre><code class="lineNumbers bash">
+cd mysite/code
+git init
+git remote add platform [PROJECT-ID]@git.[REGION].platform.sh:[PROJECT-ID].git
+git add --all
+git commit -m "Initial commit of My Project"
+git push
+    </code></pre>
+
+    <p>Es importante saber que cada vez que hacemos un "git push" Platform empaca, configura, y distribuye nuestra aplicación. Así que por cada "git push" deberemos esperar un poco mas de lo que estamos acostumbrados.</p>
+
+  </li>
+
+  <li>Para <a href="https://docs.platform.sh/drupal_migrate/guides/type/php/drupal/migrate/import-files.html">importar nuestro archivos</a> podermos usar rsync:
+
+    <pre><code class="lineNumbers bash">
+rsync -r my/local/files/. [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh:public/sites/default/files/
+    </code></pre>
+
+  </li>
+
+  <li>Y finalmente debemos <a href="https://docs.platform.sh/drupal_migrate/guides/type/php/drupal/rebuild-site-registry.html">reconstruir la "registry" del sitio</a>:
+
+    <pre><code class="lineNumbers bash">
+ssh [PROJECT-ID]-[ENV]@ssh.[REGION].platform.sh
+drush dl registry_rebuild --destination=/app/tmp
+sed -i 's/, define_drupal_root()/, '"'"'\/app\/public'"'"'/' /app/tmp/registry_rebuild/registry_rebuild.php
+cd /app/public
+php ../tmp/registry_rebuild/registry_rebuild.php
+    </code></pre>
+
+  </li>
+
+</ol>
+
+
+
+<p>Siguiendo estos pasos logré finalmente llevar mi copia local del sitio a Platform. Si usamos Drupal 8 el proceso es muy similar, pero podemos evitar el último paso que limpia la registry. Lo intenté y recuerdo que también pude evitar el settings.php que tuve que crear para Drupal 7.</p>
+
+
+
+<p>Los problemas con que yo me encontré fueron no darme cuenta que necesitaba agregar a la sección de "whitelist" los archivos CSS, JS, images y otros. Tampoco me dí cuenta que debía crear el setting.php a medida para Drupal 7. Llevó un poco de tiempo, pero en ambas ocaciones el soporte me ayudo a darme cuenta que faltaba.</p>
+
+
+
+<p>Hay mucha documentación, pero si llegaron a mi articulo supongo que el que mas les interese sea <a href="https://github.com/platformsh/platformsh-docs/blob/master/using/getting-started-for-the-impatient.md">"Getting started for the impatient"</a>, por supuesto está en inglés. No pudo resolver mis problemas, pero es un muy buen resumen del proceso.</p>
+
+
+
+<p>Cuando me encontré con los problemas que mencioné no encontré muchas experiencias previas, solo los documentos de Platform y el soporte. Así que espero que esto ayude a alguién mas.</p>

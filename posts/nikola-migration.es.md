@@ -2,11 +2,11 @@
 .. title: Usando Nikola para mi sitio
 .. slug: nikola-migration
 .. date: 2024-07-24 23:00:00 UTC-03:00
-.. tags: ignacio.bonelli
+.. tags: web
 .. author: Ignacio Bonelli
 .. link: https://www.nachodigital.com.ar/es/nikola-migration
 .. description: Migrando mi sitio de Drupal 7 a Nikola static generator
-.. category: web
+.. category: Professional
 -->
 
 Soy un apasionado por la tecnología y siempre me gustó el software libre. Trabajando en web finalmente logré juntar todo. En lo formal soy Ingeniero Electrónico, pero soy un profesional de sistemas por elección. Actualmente estoy haciendo una maestría de sistemas.
