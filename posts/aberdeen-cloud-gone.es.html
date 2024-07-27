@@ -1,0 +1,22 @@
+<!--
+.. title: ¿Que paso con nuestros sitios en AberdeenCloud? ¡Tenemos 36hs para recuperar nuestros datos!
+.. slug: aberdeen-cloud-gone
+.. date: 2016-07-01 12:50:22 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/es/aberdeen-cloud-gone
+.. description: 
+.. category: Profesional
+-->
+
+<p>AberdeenCloud quiebra y tenemos un tiempo limitado para recuperar los datos de nuestros clientes.</p>
+
+<!-- TEASER_END -->
+
+<p>Para el mercado latino probablemente esto no haya sido muy relevante, pero a los que trabajamos con Europa nos impacta bastante. Antes del frenesí con Platform.sh el niño estrella era AberdeenCloud y muchos decidimos usarlo. No soy el primero en escribir sobre esto, hasta ahora leí dos artículos al respecto en inglés y estoy 100% de acuerdo con el <a href="http://www.annertech.com/blog/the-day-that-aberdeen-cloud-went-bye-bye">de annertech</a>, la única forma de evitar este tipo de problemas es tener un backup en un proveedor alternativo. Normalmente yo escribiría sobre como recuperar tus datos de AberdeenCloud, pero como <a href="https://www.codeenigma.com/host/blog/aberdeencloud-what-happened">explica codeenigma</a> no hay mucho que pudiéramos hacer. Pero hoy tuve la feliz noticia que podremos acceder a nuestros backups desde ahora <a href="http://www.aberdeencloud.com/">hasta dentro de 36hs</a>.</p>
+
+<p>Lamentablemente nosotros no notamos que AberdeenCloud tuviera problemas hasta que fue muy tarde. Debido a otras razones teníamos un plan de migración, pero no llegamos a ejecutarlo para el único sitio que nos quedaba con ellos. Teníamos backups de ese sitio en nuestros servers, pero no eran automáticos y por lo tanto no tan frecuentes como para no perder algo. Como era un solo sitio y teníamos backups no llevó tanto recuperar el sitio. Fue muy bueno recibir la noticia de que podremos acceder a nuestros backups, pero no creímos que sucediera y recuperamos mucho con el cache de AberdeenCloud (intermitente pero estaba) y la <a href="http://archive.org/web/">Wayback Machine</a>.</p>
+
+<p>¿Que es lo realmente importante sobre lo que ocurrió? Debemos aprender que deberíamos SIEMPRE tener un backup del sitio con un proveedor alternativo. Lo vamos a necesitar si hay problemas importantes de servicio, es la única manera de asegurarnos poder recuperar los datos de nuestros clientes. No podemos confiar en un mismo proveedor sitios y backups. Además no deberíamos ser confiados en este sentido, debemos saber en quién nuestro proveedor confía. Por ejemplo si tenemos sitios con Pantheon y queremos confiar nuestros backups a NodeSquirrel, pensemos otra alternativa ya que ambos son de la misma compañía.</p>
+
+<p>Para resumir, debemos ser serios a la hora de definir nuestra estrategia de backups, incluso si solo estamos probando un servicio. En la empresa que trabajo ya lo hacemos para otros servicios que usamos, pero de ahora en mas no vamos a usar un proveedor nuevo sin primero implementar una política de backups offsite. Esta política de backups debe ser parte de nuestra implementación inicial, no algo que quede en la lista de pendientes para hacer luego de lanzar el primer sitio.</p>
