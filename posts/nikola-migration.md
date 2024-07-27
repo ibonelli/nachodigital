@@ -11,6 +11,8 @@
 
 I love technology and have always liked open source software. Working with web sites I was finally able to put it all together. Even though I have a degree in electronic engineering I am a systems professional by choice. I'm currently doing a master program in software engineering.
 
+<!-- TEASER_END -->
+
 I've been working with Linux and development since 1995. I started developing desktop applications (VisualBasic & C), then moved to Ecommerce B2B (GXS) and now web (PHP). I started with web using a propietary CMS owned by Tincan and then we migrated to Drupal. Due to personal motivations I have also developed in Java & Perl. But lately my language of choice is Python. I've worked as system administrator for Linux servers and developed different cross-platform solutions (among some personal projects). I also do system analysis from a network, application & performance point of view.
 
 I'm curious, demanding, tidy, reliable & goal driven. I have an strong technical background, but I'm a people person at heart. I enjoy working together with people and I believe in finding human ways to solve technical problems. On the last ten years I've been working with clients and teams based on UK and US. I feel very comfortable working and dealing with teams on multicultural environments. My current job is to coordinate the local team with the UK team to build complex web sites mostly for European non-governmental organizations.

@@ -1,0 +1,45 @@
+<!--
+.. title: ¿Usamos Redis o Memcached para Drupal?
+.. slug: redis-vs-memcached-for-drupal
+.. date: 2016-10-23 20:46:20 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/es/redis-vs-memcached-for-drupal
+.. description: 
+.. category: Profesional
+-->
+
+<p>Con la llegada de Drupal8 muchas cosas cambiaron, una de esas es un movimiento lateral hacia <a title="Redis" href="http://redis.io/">Redis</a> para manejar las tablas de cache. Lo que me llamó la atención es que ahora hay como una nube negra sobre <a title="Memcached" href="http://memcached.org/">Memcached</a>.</p>
+
+<!-- TEASER_END -->
+
+<div class="blog-text-with-item-list">Que lo caracteriza a cada uno:
+	<ul class="blog-item-list">
+		<li>Memcached hace solo una cosa y lo hace bien. Guarda pares de <a title="Explicación llave/valor en Wikipedia (en inglés)" href="https://en.wikipedia.org/wiki/Key-value_database">llave/valor</a> en memoria.</li>
+		<li>Si comparamos específicamente ese trabajo, Redis lo hace con una eficiencia/velocidad muy parecida a memcached (solo un poco mejor). La diferencia es que Redis puede hacer mas cosas.</li>
+	</ul>
+</div>
+
+<p>Si estamos desarrollando una plataforma nueva esto es un buen argumento en favor de Redis. Es mas complicado, lleva mas tiempo aprenderlo, pero podremos hacer mas cosas. Para mi lo mas interesante es el diseño escalable que tiene.</p>
+
+<div class="blog-text-with-item-list">¿Cuando elegir cual?
+	<ul class="blog-item-list">
+		<li>Si ya están usando Memcached, yo lo seguiría usando. No veo razón para cambiar inmediatamente.</li>
+		<li>Si tienen un proveedor que solo provee uno de los dos, simplemente usen ese. Siempre es mejor tener un servicio que nos permita acelerar el caché que usar la base de datos.</li>
+		<li>Si no están usando ninguno, elijan uno y empiecen a usarlo. Ambos van a mejorar la performance.</li>
+	</ul>
+</div>
+
+<p>Drupal7 tiene módulos estables para ambos: <a title="Memcache Drupal's module" href="https://www.drupal.org/project/memcache">memcache</a> y <a title="Drupal's Redis module" href="https://www.drupal.org/project/redis">Redis</a>. En la charla que di sobre <a title="Drupal Performance y MemCache" href="https://ibonelli.github.io/drupalstuff/reveal.js/drupal_performance.html#/2/7">Drupal performance</a> hay mas detalles de como hacerlo.</p>
+
+<p>Si ya comenzaron a usar Drupal8 o estan haciendo un desarrollo nuevo que necesita mejorar su velocidad de respuesta agregándole caché yo al menos evaluaría también Redis. Para Drupal hay versiones alpha que integra cualquiera de los dos.</p>
+
+<p>Quienes soportan que en el mundo Drupal: Acquia solo soporta memcached. Pantheon y Platform solo soportan Redis.</p>
+
+<div class="blog-text-with-item-list">Si quieren saber mas les recomiendo leer (todo en inglés):
+	<ul class="blog-item-list">
+		<li>Un articulo de bigdatalittlegeek <a title="bigdatalittlegeek memcached vs redis" href="http://www.bigdatalittlegeek.com/blog/2014/3/25/memcached-vs-redis">comparando memcached y redis</a>.</li>
+		<li>Una <a title="Stackoverflow memcached vs redis" href="http://stackoverflow.com/questions/10558465/memcached-vs-redis">charla en stackoverflow</a> muy clara sobre diferencias entre estos servidores.</li>
+		<li>El siguiente <a title="Why Redis beats Memcached for caching" href="http://www.infoworld.com/article/3063161/application-development/why-redis-beats-memcached-for-caching.html">articulo de InfoWorld</a> que explica por que técnicamente Redis es mejor.</li>
+	</ul>
+</div>

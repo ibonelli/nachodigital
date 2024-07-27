@@ -1,0 +1,148 @@
+<!--
+.. title: Nuevo método de GoDaddy para verificar que un dominio es nuestro usando HTML
+.. slug: godaddy-html-validation
+.. date: 2017-02-09 22:43:43 UTC-03:00
+.. tags: drupal, web
+.. author: Ignacio Bonelli
+.. link: https://www.nachodigital.com.ar/es/godaddy-html-validation
+.. description: 
+.. category: Profesional
+-->
+
+<p>Tuve que lidiar con ciertas diferencias y problemas en mi configuración, espero que a alquien más le sea útil esto.</p>
+
+<!-- TEASER_END -->
+
+<p>Las dificultadas para hacer que esto funcionara con apache y en mi configuración fueron:</p>
+
+<ul>
+
+  <li>Yo no sabía que los directorios ocultos (.) estaban bloqueados en Apache. Esta es la configuración por defecto, se puede cambiar pero no es seguro.</li>
+
+  <li>En mi caso tengo dominios que solo trabajan en HTTPS (el dominio HTTP está redirigido a HTTPS). Esto hizo que mis reglas tengan que coexistir con las de la redirección HTTPS.</li>
+
+  <li>Tengo sitios corriendo un apache que yo controlo (pudiendo usar configuraciones en el Virtual Host) y otros que corren en Acquia (y lo único que puedo usar es el .htaccess).</li>
+
+</ul>
+
+<p>La verdad que las reglas resultantes no son muy complicadas, pero llevó bastantes pruebas llegar a ellas. Finalmente logré reglas que funcionaran tanto para VirtualHost como para .htaccess (no son iguales).</p>
+
+
+
+<p>Por supuesto que podríamos haber hecho una <a href="https://uk.godaddy.com/help/verify-domain-ownership-html-or-dns-7452">verificación usando DNS</a>, pero en muchos casos eso significa involucrar al dueño del dominio y termina llevando mas tiempo. A veces incluso se puede complicar ya que el dueño no entiende de DNS.</p>
+
+
+
+<p><b>Configuración para Virtual Host (sitios donde controlamos la configuración de apache):</b></p>
+
+
+
+    <pre><code class="nohighlight">
+
+RewriteEngine  on
+
+RewriteRule    "^/\.well-known/pki-validation/godaddy\.html/" "/godaddycode.txt" [PT]
+
+RewriteRule    "^/\.well-known/pki-validation/godaddy\.html$" "/godaddycode.txt" [PT]
+
+    </code></pre>
+
+
+
+<p><b>Si el sitio solo corre sobre HTTPS y tenemos reglas de redirección deberemos agregar las siguientes reglas:</b></p>
+
+
+
+    <pre><code class="nohighlight">
+RewriteCond %{REQUEST_URI} =!/.well-known/pki-validation/godaddy.html
+RewriteCond %{REQUEST_URI} =!/.well-known/pki-validation/godaddy.html/
+RewriteRule ^(.*)$ https://www.mydomain.com/ [R=permanent,L]
+    </code></pre>
+
+
+
+<p><b>Si solo podemos usar reglas en .htaccess (y no tenemos redirecciones HTTPS):</b></p>
+
+
+
+    <pre><code class="nohighlight">
+# GoDaddy verification rewrite rules
+&lt;IfModule mod_rewrite.c&gt;
+  RewriteRule    "^.well-known/pki-validation/godaddy.html/" "/godaddycode.txt" [PT,L]
+  RewriteRule    "^.well-known/pki-validation/godaddy.html$" "/godaddycode.txt" [PT,L]
+&lt;/IfModule&gt;
+    </code></pre>
+
+
+
+<p><b>Usando solo reglas en .htaccess e incluyendo reglas de redirección a HTTPS:</b></p>
+
+
+
+    <pre><code class="nohighlight">
+# GoDaddy with HTTPS redirection rules
+&lt;IfModule mod_rewrite.c&gt;
+  # GoDaddy PassThrough rules
+  RewriteRule    "^.well-known/pki-validation/godaddy.html/" "/godaddycode.txt" [PT,L]
+  RewriteRule    "^.well-known/pki-validation/godaddy.html$" "/godaddycode.txt" [PT,L]
+
+  # Set "protossl" to "s" if we were accessed via https://.  This is used later
+  # if you enable "www." stripping or enforcement, in order to ensure that
+  # you don't bounce between http and https.
+  RewriteRule ^ - [E=protossl]
+  RewriteCond %{HTTPS} on
+  RewriteRule ^ - [E=protossl:s]
+
+  # Redirect HTTP to HTTPS
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteCond %{REQUEST_URI} !=/godaddycode.txt
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+&lt;/IfModule&gt;
+    </code></pre>
+
+
+
+<p><b>Para hacer que esto funcione en Acquia tuve que tomar prestadas algunas reglas de .htaccess que viene con D8</b></p>
+
+<p>Así que reemplacé las reglas:</p>
+
+
+
+    <pre><code class="lineNumbers nohighlight">
+# Protect files and directories from prying eyes (D7)
+&lt;FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)(|~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$"&gt;
+  Order allow,deny
+&lt;/FilesMatch&gt;
+
+# Block access to "hidden" directories whose names begin with a period... (D7)
+RewriteRule "(^|/)\." - [F]
+    </code></pre>
+
+
+
+<p>Por estas que vienen con D8:</p>
+
+
+
+    <pre><code class="lineNumbers nohighlight">
+# Protect files and directories from prying eyes (D8)
+&lt;FilesMatch "\.(engine|inc|install|make|module|profile|po|sh|.*sql|theme|twig|tpl(\.php)?|xtmpl|yml)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\.(?!well-known).*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock))$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig|\.save)$"&gt;
+  &lt;IfModule mod_authz_core.c&gt;
+    Require all denied
+  &lt;/IfModule&gt;
+  &lt;IfModule !mod_authz_core.c&gt;
+    Order allow,deny
+  &lt;/IfModule&gt;
+&lt;/FilesMatch&gt;
+
+# Block access to "hidden" directories whose names begin with a period... (D8)
+RewriteRule "(^|/)\.(?!well-known)" - [F]
+    </code></pre>
+
+
+
+<p>Espero que esto ayude a alguien. Se que me llevó bastante tiempo llegar a las reglas correctas y no pude encontrar ningún articulo que me acercara a la respuesta.</p>
+
+
+
+<p>Nota: El código que nos da GoDaddy debe ponerse en un archivo llamado godaddycode.txt dentro del directorio docroot de nuestro webserver.</p>

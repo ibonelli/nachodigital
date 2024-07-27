@@ -11,6 +11,8 @@
 
 Soy un apasionado por la tecnología y siempre me gustó el software libre. Trabajando en web finalmente logré juntar todo. En lo formal soy Ingeniero Electrónico, pero soy un profesional de sistemas por elección. Actualmente estoy haciendo una maestría de sistemas.
 
+<!-- TEASER_END -->
+
 Estoy con Linux y trabajo en desarrollo desde 1995. Laboralmente primero en desktop (VisualBasic y C), luego Ecommerce B2B (GXS) y ahora web (PHP). Empecé en web con un CMS propietario de la empresa donde trabajo (Tincan) y luego migramos gradualmente a Drupal. Por mis motivaciones personales también he usado Java y Perl. Pero últimamente lo que me gusta usar es Python. He mantenido servers en Linux y desarrollado diversas soluciones (además de algunos proyectos personales). También he analizado sistemas desde el punto de vista de red, aplicación y performance.
 
 Soy inquieto, exigente, ordenado, confiable y funciono muy bien por objetivos. Tengo un perfil técnico fuerte, pero me destaco por tener muy buena relación con la gente. En mis últimos trabajos he coordinado equipos locales y articulado la comunicación con otros equipos remotos. Ha sido una constante en mi trabajo el entorno multicultural y el uso del idioma inglés como forma exclusiva de comunicación con clientes y pares.
