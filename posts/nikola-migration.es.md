@@ -7,6 +7,7 @@
 .. link: https://www.nachodigital.com.ar/es/nikola-migration
 .. description: Migrando mi sitio de Drupal 7 a Nikola static generator
 .. category: Professional
+.. draft: True
 -->
 
 Soy un apasionado por la tecnología y siempre me gustó el software libre. Trabajando en web finalmente logré juntar todo. En lo formal soy Ingeniero Electrónico, pero soy un profesional de sistemas por elección. Actualmente estoy haciendo una maestría de sistemas.

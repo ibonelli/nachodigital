@@ -7,6 +7,7 @@
 .. link: https://www.nachodigital.com.ar/nikola-migration
 .. description: Migrating my site from Drupal 7 to Nikola static generator
 .. category: Professional
+.. draft: True
 -->
 
 I love technology and have always liked open source software. Working with web sites I was finally able to put it all together. Even though I have a degree in electronic engineering I am a systems professional by choice. I'm currently doing a master program in software engineering.
