@@ -3,11 +3,20 @@ body {
     color: #05864c; /* Light text color for contrast */
 }
 
+p, div {
+    font-size: medium;
+}
+
 /* You might need to adjust link colors as well */
 a {
     color: #07a860; /* Example light link color */
     font-weight: bold;
 }
+
+.introduction {
+    padding-bottom: 50px;
+}
+
 
 a:hover,
 a:focus {

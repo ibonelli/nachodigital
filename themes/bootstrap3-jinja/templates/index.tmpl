@@ -17,7 +17,7 @@
 {% block content %}
 {% if lang == 'en' %}
     <div class="introduction">
-        <h2>Welcome</h2>
+        <h1>Welcome</h1>
         <p>Hi, I live in Argentina and I work with an UK Drupal workshop (mainly).</p>
         <p>In here you'll find mostly technical articles about Linux and Drupal (along with other stuff and random thoughts).</p>
         <p>Please visit my <a href="/aboutme">CV</a>, the <a href="/articles">articles area</a> or the <a href="/cambalache">personal interests</a> area.</p>
@@ -25,7 +25,7 @@
     </div>
 {% elif lang == 'es' %}
     <div class="introduction">
-        <h2>Bienvenido</h2>
+        <h1>Bienvenido</h1>
         <p>Hola, vivo en Argentina y trabajo para una empresa que crea sitios web. También soy docente de la <a href="http://www.electron.frba.utn.edu.ar/materias.php?cod=95-0452#marca">UTN</a>.</p>
         <p>Aquí encontraran articulos técnicos de Drupal, Linux y también un cambalache de mis intereses generales.</p>
         <p>Si les interesa pueden ver mi <a href="/es/micv">CV</a>, los <a href="/es/articles">articulos</a> o la sección <a href="/es/cambalache">cambalache</a>! Para mis alumnos de informática1 visiten <a href="http://info.nachodigital.com.ar">el sitio de la cátedra</a>.</p>
@@ -43,11 +43,12 @@
 {% if page_links %}
     {{ pagination.page_navigation(current_page, page_links, prevlink, nextlink, prev_next_links_reversed) }}
 {% endif %}
+<h1>Blog Posts</h1>
 <div class="postindex">
 {% for post in posts %}
     <article class="h-entry post-{{ post.meta('type') }}" itemscope="itemscope" itemtype="http://schema.org/Article">
     <header>
-        <h1 class="p-name entry-title"><a href="{{ post.permalink() }}" class="u-url">{{ post.title()|e }}</a></h1>
+        <h2 class="p-name entry-title"><a href="{{ post.permalink() }}" class="u-url">{{ post.title()|e }}</a></h2>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
             {% if author_pages_generated and multiple_authors_per_post %}
