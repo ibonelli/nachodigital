@@ -301,8 +301,10 @@ TIMEZONE = "America/Argentina/Buenos_Aires"
 # One or more folders containing files to be copied as-is into the output.
 # The format is a dictionary of {source: relative destination}.
 # Default is:
-# FILES_FOLDERS = {'files': ''}
-# Which means copy 'files' into 'output'
+
+FILES_FOLDERS = {
+    'files': 'static',
+}
 
 # One or more folders containing code listings to be processed and published on
 # the site. The format is a dictionary of {source: relative destination}.
