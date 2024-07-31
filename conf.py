@@ -142,14 +142,14 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/pages/about-me/index.html", "Welcome"),
+        ("/pages/not-random/index.html", "NotRandom"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
     ),
 
     "es": (
-        ("/es/pages/about-me/index.html", "Bienvenido"),
+        ("/es/pages/not-random/index.html", "NotRandom"),
         ("/es/archive.html", "Archivo"),
         ("/es/categories/", "Etiquetas"),
         ("/es/rss.xml", "Canal RSS"),
