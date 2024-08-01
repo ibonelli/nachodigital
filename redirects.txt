@@ -1,79 +1,55 @@
-EN
+---------------------------
+nachodigital-le-ssl.conf
+---------------------------
 
-/posts/aberdeen-cloud-gone/
-/posts/asimov-books/
-/posts/business-modelling/
-/posts/drupal-picnic-ba/
-/posts/drupal-planet/
-/posts/drupal-platform-sh/
-/posts/drupal-plugins/
-/posts/drupal8-what-it-will-bring/
-/posts/drupalcamp-santiago/
-/posts/drupalcon-bogota-2015/
-/posts/drupalcon-dublin-2016/
-/posts/godaddy-html-validation/
-/posts/linux-desktop/
-/posts/redis-vs-memcached-for-drupal/
-/posts/rsa-animations/
-/posts/rss-atom-podcasts/
-/posts/using-drupal-for-a-week/
-/posts/wordpress-security/
+Include /etc/apache2/sites-available/nachodigital_redirects.conf
 
-ES
+---------------------------
+nachodigital_redirects.conf
+---------------------------
 
-/es/posts/aberdeen-cloud-gone/
-/es/posts/asimov-books/
-/es/posts/business-modelling/
-/es/posts/drupal-picnic-ba/
-/es/posts/drupal-planet/
-/es/posts/drupal-platform-sh/
-/es/posts/drupal-plugins/
-/es/posts/drupal8-what-it-will-bring/
-/es/posts/drupalcamp-santiago/
-/es/posts/drupalcon-bogota-2015/
-/es/posts/drupalcon-dublin-2016/
-/es/posts/godaddy-html-validation/
-/es/posts/linux-desktop/
-/es/posts/redis-vs-memcached-for-drupal/
-/es/posts/rsa-animations/
-/es/posts/rss-atom-podcasts/
-/es/posts/using-drupal-for-a-week/
-/es/posts/wordpress-security/
+# Redirects
+Redirect 301 /aboutme /pages/not-random/index.html
+Redirect 301 /es/micv /es/pages/not-random/index.html
+Redirect 301 /articles /
+Redirect 301 /es/articles /es/
+Redirect 301 /articles-rss /rss.xml
+Redirect 301 /es/articles-rss /es/rss.xml
 
-Site
+Redirect 301 /content/drupal-picnic-bsas-argentina /posts/drupal-picnic-ba/
+Redirect 301 /content/aberdeencloud-gone-we-have-36hs-recover-your-backups /posts/aberdeen-cloud-gone/
+Redirect 301 /content/assisting-drupalcon-dublin-2016 /posts/drupalcon-dublin-2016/
+Redirect 301 /content/drupal-new-plugin-architecture /posts/drupal-plugins/
+Redirect 301 /content/first-drupalcamp-santiagochile /posts/drupalcamp-santiago/
+Redirect 301 /content/godaddy-html-validation-using-apache /posts/godaddy-html-validation/
+Redirect 301 /content/moving-existing-site-platformsh /posts/drupal-platform-sh/
+Redirect 301 /content/my-second-drupalcon-bogot%C3%A1-2015 /posts/drupalcon-bogota-2015/
+Redirect 301 /content/redis-vs-memcached-drupal /posts/redis-vs-memcached-for-drupal/
+Redirect 301 /content/rss-atom-podcasts-something-more-out-there /posts/rss-atom-podcasts/
+Redirect 301 /content/security-wordpress /posts/wordpress-security/
+Redirect 301 /content/using-drupal-week /posts/using-drupal-for-a-week/
+Redirect 301 /content/what-motivate-us /posts/rsa-animations/
+Redirect 301 /content/what-will-drupal8-bring /posts/drupal8-what-it-will-bring/
+Redirect 301 /content/el-hilo-conductor-en-los-libros-de-asimov /posts/asimov-books/
+Redirect 301 /content/como-modelar-un-negocio /posts/business-modelling/
+Redirect 301 /content/es/drupal-planeta-rss-espa%C3%B1ol-y-portugues /posts/drupal-planet/
+Redirect 301 /content/el-escritorio-en-linux /posts/linux-desktop/
 
-https://www.nachodigital.com.ar/
-https://www.nachodigital.com.ar/aboutme
-https://www.nachodigital.com.ar/articles
-https://www.nachodigital.com.ar/cambalache
-https://www.nachodigital.com.ar/cambalache-tag
-https://www.nachodigital.com.ar/content/aberdeencloud-gone-we-have-36hs-recover-your-backups
-https://www.nachodigital.com.ar/content/assisting-drupalcon-dublin-2016
-https://www.nachodigital.com.ar/content/drupal-new-plugin-architecture
-https://www.nachodigital.com.ar/content/first-drupalcamp-santiagochile
-https://www.nachodigital.com.ar/content/godaddy-html-validation-using-apache
-https://www.nachodigital.com.ar/content/moving-existing-site-platformsh
-https://www.nachodigital.com.ar/content/my-second-drupalcon-bogot%C3%A1-2015
-https://www.nachodigital.com.ar/content/redis-vs-memcached-drupal
-https://www.nachodigital.com.ar/content/rss-atom-podcasts-something-more-out-there
-https://www.nachodigital.com.ar/content/security-wordpress
-https://www.nachodigital.com.ar/content/using-drupal-week
-https://www.nachodigital.com.ar/content/what-motivate-us
-https://www.nachodigital.com.ar/content/what-will-drupal8-bring
-https://www.nachodigital.com.ar/divulgation
-https://www.nachodigital.com.ar/drupal
-https://www.nachodigital.com.ar/home
-https://www.nachodigital.com.ar/linux
-https://www.nachodigital.com.ar/tags/testing
-https://www.nachodigital.com.ar/tags/web
-https://www.nachodigital.com.ar/technical
-https://www.nachodigital.com.ar/wordpress
-
-https://www.nachodigital.com.ar/es/micv
-https://www.nachodigital.com.ar/es/articles
-
-https://www.nachodigital.com.ar/es/content/drupal-picnic-bsas-argentina
-https://www.nachodigital.com.ar/content/drupal-picnic-bsas-argentina
-
-https://www.nachodigital.com.ar/content/my-second-drupalcon-bogot%C3%A1-2015
-https://www.nachodigital.com.ar/es/content/my-second-drupalcon-bogot%C3%A1-2015
+Redirect 301 /es/content/drupal-picnic-bsas-argentina /es/posts/drupal-picnic-ba/
+Redirect 301 /es/content/aberdeencloud-gone-we-have-36hs-recover-your-backups /es/posts/aberdeen-cloud-gone/
+Redirect 301 /es/content/assisting-drupalcon-dublin-2016 /es/posts/drupalcon-dublin-2016/
+Redirect 301 /es/content/drupal-new-plugin-architecture /es/posts/drupal-plugins/
+Redirect 301 /es/content/first-drupalcamp-santiagochile /es/posts/drupalcamp-santiago/
+Redirect 301 /es/content/godaddy-html-validation-using-apache /es/posts/godaddy-html-validation/
+Redirect 301 /es/content/moving-existing-site-platformsh /es/posts/drupal-platform-sh/
+Redirect 301 /es/content/my-second-drupalcon-bogot%C3%A1-2015 /es/posts/drupalcon-bogota-2015/
+Redirect 301 /es/content/redis-vs-memcached-drupal /es/posts/redis-vs-memcached-for-drupal/
+Redirect 301 /es/content/rss-atom-podcasts-something-more-out-there /es/posts/rss-atom-podcasts/
+Redirect 301 /es/content/security-wordpress /es/posts/wordpress-security/
+Redirect 301 /es/content/using-drupal-week /es/posts/using-drupal-for-a-week/
+Redirect 301 /es/content/what-motivate-us /es/posts/rsa-animations/
+Redirect 301 /es/content/what-will-drupal8-bring /es/posts/drupal8-what-it-will-bring/
+Redirect 301 /es/content/el-hilo-conductor-en-los-libros-de-asimov /es/posts/asimov-books/
+Redirect 301 /es/content/como-modelar-un-negocio /es/posts/business-modelling/
+Redirect 301 /es/content/es/drupal-planeta-rss-espa%C3%B1ol-y-portugues /es/posts/drupal-planet/
+Redirect 301 /es/content/el-escritorio-en-linux /es/posts/linux-desktop/

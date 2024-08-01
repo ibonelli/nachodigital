@@ -20,8 +20,8 @@ BLOG_AUTHOR = "Ignacio Bonelli"  # (translatable)
 BLOG_TITLE = "NachoDigital"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-#SITE_URL = "https://www.nachodigital.com.ar/"
-SITE_URL = "http://127.0.0.1:8000/"
+SITE_URL = "https://www.nachodigital.com.ar/"
+#SITE_URL = "http://127.0.0.1:8000/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://www.nachodigital.com.ar/"
